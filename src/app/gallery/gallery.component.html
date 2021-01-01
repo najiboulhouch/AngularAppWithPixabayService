@@ -1,0 +1,40 @@
+<div class="container mt-4" >
+    <div class="card">
+        <div class="card-header">
+            Gallery Component
+        </div>
+        <div class="card-body">
+            <form #f="ngForm" class="form-inline" (ngSubmit)="onSearch(f.value)">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="motCle" class="mr-3">Mot clé  </label>
+                            <input type="text" required="" name="motCle" required ngModel [(ngModel)]="motCle" 
+                            class="form-control" 
+                            id="motCle">
+                        </div>
+                          <button type="submit" [disabled]="!f.valid" class="btn btn-primary mb-2">Chercher</button>
+            </form>
+                <div class="row">
+                    <div *ngFor="let p of pagePhoto?.hits" class="col-md-3">
+                        <div class="card cadre mb-4">
+                            <div class="card-header">                            
+                                {{ p.tags }}
+                            </div>
+                            <div class="card-body">
+                                
+                                    <span class="badge badge-success mb-3">User: {{p.user}}</span>
+                                
+                                <img src="{{ p.previewURL }}" class="img-thumbnail" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <nav aria-label="Page navigation example" class="mt-3">
+        <ul class="pagination">
+          <li  *ngFor="let page of pages; let i=index" [ngClass]="{'active':currentPage==(i + 1)}" class="page-item clickable">
+              <a class="page-link"  (click)="goToPage(i)">{{ i + 1 }}</a>
+          </li>
+        </ul>
+      </nav>
+</div>
